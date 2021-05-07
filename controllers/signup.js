@@ -6,9 +6,8 @@ const skillFile = require('../util/skillFile');
 
 let signUp = {}
 signUp.processSignup = (req, res) => {
-    console.log(req.query)
     let profile = req.session.passport.user.profile
-    let userSkillSummary = { "name": profile.name, skills: {}, questions: {} }
+    let userSkillSummary = { "name": profile.name, "maxHP": profile.maxHP, "skills": {}, "questions": {} }
     for ( let k in profile.skills.value) {
         let skills = profile.skills.value[k][0];
         for (let j in skills.skill) {
@@ -38,11 +37,9 @@ signUp.processSignup = (req, res) => {
 
 let add_query_params_to_skills = function(query, skills) {
     for (let q in query) {
-        console.log(q);
-        console.log(query[q]);
         skills['questions'][q] = query[q];
     }
-    console.log(skills);
+
     return Promise.resolve(skills);
 }
 

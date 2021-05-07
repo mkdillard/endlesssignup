@@ -55,8 +55,6 @@ skillFile.save = function(userSkills) {
 skillFile.csv = function() {
     skillFile.read()
         .then((users) => {
-            console.log(typeof(users))
-            console.log(users)
             let csvUsers = users.map(user => {
                 let newUser = {name: user.name, ...user.skills, ...user.questions}
                 return newUser
