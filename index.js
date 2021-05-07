@@ -28,20 +28,25 @@ app.use(passport.session());
 
 // import controllers
 const auth = require('./controllers/authentication');
+const signUp = require('./controllers/signUp');
 
 const rootPath = function (req, res) {
     return res.sendFile(path.join(__dirname, 'public', 'index.html'));
 };
 
-app.get('/error', function (req, res) {
-    return res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'error.html'));
-});
-
 app.get('/login', auth.passportAuth);
 
 app.get('/oauth2callback', auth.passportAuth);
 
-app.get('/loginSuccess', auth.loginSuccess);
+app.get('/questionaire', function (req, res) {
+    return res.sendFile(path.join(__dirname, 'public', 'pages', 'questions.html'));
+});
+
+app.get('/signup', signUp.processSignup);
+
+app.get('/error', function (req, res) {
+    return res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'error.html'));
+});
 
 // serve requests for static files that exist in public folder. This endpoint should always be second to last.
 app.use(express.static(path.join(__dirname, 'public')));

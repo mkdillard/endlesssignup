@@ -14,54 +14,71 @@ skillFile.read = function() {
         fs.writeFileSync(filePath, JSON.stringify([], null, 4), (err) => {
             if (err) {
                 console.log(`Error writing to file ${filePath}`);
+                return Promise.reject(err);
             }
         });
         
     }
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return Promise.resolve(JSON.parse(fs.readFileSync(filePath, 'utf8')));
 }
 
 skillFile.save = function(userSkills) {
-    let users = skillFile.read();
-
-    let userExists = users.some(user => {
-        return user.name === userSkills.name;
-    });
-    if ( userExists ) {
-        users.forEach(user => {
-            if (user.name === userSkills.name) {
-                user.skills = userSkills.skills;
-            }
+    skillFile.read()
+    .then((users) => {
+        let userExists = users.some(user => {
+            return user.name === userSkills.name;
         });
-    } else {
-        users.push(userSkills);
-    }
-    fs.writeFileSync(filePath, JSON.stringify(users, null, 4), (err) => {
-        if (err) {
-            console.log(`Error writing to file ${filePath}`);
+        if ( userExists ) {
+            users.forEach(user => {
+                if (user.name === userSkills.name) {
+                    user.skills = userSkills.skills;
+                    user.questions = userSkills.questions;
+                }
+            });
+        } else {
+            users.push(userSkills);
         }
+        fs.writeFileSync(filePath, JSON.stringify(users, null, 4), (err) => {
+            if (err) {
+                console.log(`Error writing to file ${filePath}`);
+                return Promise.reject(err);
+            }
+            return Promise.resolve();
+        });
+    })
+    .catch((err) => {
+        return Promise.reject(err);
     });
 }
 
 
 skillFile.csv = function() {
-    let users = skillFile.read();
-    let csvUsers = users.map(user => {
-        let newUser = {name: user.name, ...user.skills}
-        return newUser
-    });
-    let options = {
-        delimiter : ',',
-        headers : "relative",
-        wrap: false
-    }
-    let csvString = csvjson.toCSV(csvUsers, options);
-    console.log(csvString);
-    fs.writeFileSync(filePathCSV, csvString, (err) => {
-        if (err) {
-            console.log(`Error writing to file ${filePath}`);
-        }
-    });
+    skillFile.read()
+        .then((users) => {
+            console.log(typeof(users))
+            console.log(users)
+            let csvUsers = users.map(user => {
+                let newUser = {name: user.name, ...user.skills, ...user.questions}
+                return newUser
+            });
+            let options = {
+                delimiter : ',',
+                headers : "relative",
+                wrap: false
+            }
+            let csvString = csvjson.toCSV(csvUsers, options);
+            console.log(csvString);
+            fs.writeFileSync(filePathCSV, csvString, (err) => {
+                if (err) {
+                    console.log(`Error writing to file ${filePath}`);
+                    return Promise.reject(err);
+                }
+            });
+        })
+        .catch((err) => {
+            return Promise.reject(err)
+        });
+    
 }
 
 module.exports = skillFile
