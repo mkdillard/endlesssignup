@@ -23,7 +23,8 @@ swcCharacter.getCharacterInfo = function(accessToken) {
             let char = {
                 userid : profile.uid,
                 name : profile.name,
-                skills : profile.skills
+                skills : profile.skills,
+                maxHP : profile.healthMax
             }
             return Promise.resolve(char);
         })
