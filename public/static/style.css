@@ -44,3 +44,22 @@
     font-size: large;
     color: var(--ee-light-blue);
 }
+
+.question-page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    border: 5px solid var(--ee-light-blue);
+}
+
+.question-page button {
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: var(--ee-nav-background2);
+    color: var(--ee-light-blue);
+    border: 5px solid var(--ee-light-blue);
+}
