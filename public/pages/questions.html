@@ -9,17 +9,19 @@
         <title>Endless Endeavors DataCard Showdown Signup</title>
     </head>
     <body>
-        <div class="question-page">
+        <div class="flexContainer">
             <h1>Signup Questionaire</h1>
-            <p class="question">Question 1</p>
-            <textarea class="answer">Answer here...</textarea>
-            <p class="question">Question 2</p>
-            <textarea class="answer">Answer here...</textarea>
-            <p class="question">Question 3</p>
-            <textarea class="answer">Answer here...</textarea>
-            <p class="question">Question 4</p>
-            <textarea class="answer">Answer here...</textarea>
-            <button>Submit Answers</button>
+            <form action="/signup">
+                <label class="question" for="q1">Question 1</label><br>
+                <input type="text" id="q1" name="q1" class="answer" placeholder="Answer here..."><br>
+                <label class="question" for="q2">Question 2</label><br>
+                <input type="text" id="q2" name="q2" class="answer" placeholder="Answer here..."><br>
+                <label class="question" for="q3">Question 3</label><br>
+                <input type="text" id="q3" name="q3" class="answer" placeholder="Answer here..."><br>
+                <label class="question" for="q4">Question 4</label><br>
+                <input type="text" id="q4" name="q4" class="answer" placeholder="Answer here..."><br>
+                <button type="submit" class="button">Submit Answers</button>
+            </form>
         </div>
     </body>
 </html>
