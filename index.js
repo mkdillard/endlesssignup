@@ -39,13 +39,13 @@ app.get('/login', auth.passportAuth);
 app.get('/oauth2callback', auth.passportAuth);
 
 app.get('/questionaire', function (req, res) {
-    return res.sendFile(path.join(__dirname, 'public', 'pages', 'questions.html'));
+    return res.sendFile(path.join(__dirname, 'public', 'questions.html'));
 });
 
 app.get('/signup', signUp.processSignup);
 
 app.get('/error', function (req, res) {
-    return res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'error.html'));
+    return res.sendFile(path.join(__dirname, '../', 'public', 'error.html'));
 });
 
 // serve requests for static files that exist in public folder. This endpoint should always be second to last.
