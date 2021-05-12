@@ -31,25 +31,44 @@ const auth = require('./controllers/authentication');
 const signUp = require('./controllers/signUp');
 
 const rootPath = function (req, res) {
+    console.log('rootPath')
+    console.log(req.url);
     return res.sendFile(path.join(__dirname, 'public', 'index.html'));
 };
 
-app.get('/login', auth.passportAuth);
+app.get('/showdownsignup/login', auth.passportAuth);
 
-app.get('/oauth2callback', auth.passportAuth);
+app.get('/showdownsignup/oauth2callback', auth.passportAuth);
 
-app.get('/questionaire', function (req, res) {
-    return res.sendFile(path.join(__dirname, 'public', 'pages', 'questions.html'));
+app.get('/showdownsignup/signup', signUp.processSignup);
+
+app.get('/showdownsignup/style.css', function (req, res) {
+    console.log('css')
+    console.log(req.url);
+    console.log(path.join(__dirname, 'public', 'style.css'));
+    return res.sendFile(path.join(__dirname, 'public', 'style.css'));
 });
 
-app.get('/signup', signUp.processSignup);
-
-app.get('/error', function (req, res) {
-    return res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'error.html'));
+app.get('/showdownsignup/questionaire', function (req, res) {
+    console.log('qs')
+    console.log(req.url);
+    console.log(path.join(__dirname, 'public', 'questions.html'));
+    return res.sendFile(path.join(__dirname, 'public', 'questions.html'));
 });
 
-// serve requests for static files that exist in public folder. This endpoint should always be second to last.
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/showdownsignup/finished', function (req, res) {
+    console.log('finished')
+    console.log(req.url);
+    console.log(path.join(__dirname, 'public', 'finished.html'));
+    return res.sendFile(path.join(__dirname, 'public', 'finished.html'));
+});
+
+app.get('/showdownsignup/error', function (req, res) {
+    console.log('error')
+    console.log(req.url);
+    console.log(path.join(__dirname, 'public', 'error.html'));
+    return res.sendFile(path.join(__dirname, 'public', 'error.html'));
+});
 
 // passthrough for vue router to enable browser page refresh, etc. This endpoint should always be last.
 app.get('/*', rootPath);

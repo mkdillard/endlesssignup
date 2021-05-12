@@ -31,6 +31,7 @@ skillFile.save = function(userSkills) {
         if ( userExists ) {
             users.forEach(user => {
                 if (user.name === userSkills.name) {
+                    user.maxHP = userSkills.maxHP,
                     user.skills = userSkills.skills;
                     user.questions = userSkills.questions;
                 }
@@ -56,7 +57,7 @@ skillFile.csv = function() {
     skillFile.read()
         .then((users) => {
             let csvUsers = users.map(user => {
-                let newUser = {name: user.name, ...user.skills, ...user.questions}
+                let newUser = {name: user.name, maxHP: user.maxHP, ...user.skills, ...user.questions}
                 return newUser
             });
             let options = {
@@ -65,7 +66,6 @@ skillFile.csv = function() {
                 wrap: false
             }
             let csvString = csvjson.toCSV(csvUsers, options);
-            console.log(csvString);
             fs.writeFileSync(filePathCSV, csvString, (err) => {
                 if (err) {
                     console.log(`Error writing to file ${filePath}`);

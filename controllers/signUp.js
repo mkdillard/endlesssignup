@@ -28,10 +28,10 @@ signUp.processSignup = (req, res) => {
             return Promise.resolve(sendMail.send(userSkillSummary.name, fileName));
         })
         .then(() => {
-            return Promise.resolve(res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'finished.html')));
+            return Promise.resolve(res.sendFile(path.join(__dirname, '../', 'public', 'finished.html')));
         })
         .catch((err) => {
-            return Promise.resolve(res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'error.html')));
+            return Promise.resolve(res.sendFile(path.join(__dirname, '../', 'public', 'error.html')));
         });    
 };
 
