@@ -3,11 +3,13 @@
     --ee-light-blue: #38B6FA;
     --ee-nav-background: #1E4A61;
     --ee-nav-background2: #1A3F53;
+    background-color: #E4E4E4;
 }
 
 .flexContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 60%;
     margin: auto;
@@ -47,4 +49,8 @@
 .answer {
     width: 80%;
     margin-bottom: 20px;
+}
+
+.mainLogo{
+    width: 40%;
 }
