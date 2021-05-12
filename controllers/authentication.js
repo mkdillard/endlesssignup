@@ -7,7 +7,7 @@ const skillFile = require('../util/skillFile');
 const swc_scopes = require('../util/swcScopes');
 
 let authentication = {}
-authentication.passportAuth = passport.authenticate('oauth2', { successRedirect: '/questionaire', failureRedirect: '/error', scope: swc_scopes.scope });
+authentication.passportAuth = passport.authenticate('oauth2', { successRedirect: '/showdownsignup/questionaire', failureRedirect: '/showdownsignup/error', scope: swc_scopes.scope });
 
 authentication.logout = (req, res) => {
     req.logout();
